@@ -12,6 +12,15 @@ public class pDatePrincipal {
 			System.out.println("No es la misma fecha.");
 		}
 		System.out.println(myFecha);
+		Date today;
+		
+		try {
+			today = new Date(99, 14, 2017);
+			System.out.println(today.toString());
+		} catch (DateException e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 		
 

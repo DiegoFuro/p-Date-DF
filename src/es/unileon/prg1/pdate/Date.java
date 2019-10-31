@@ -13,7 +13,13 @@ public class Date {
 		this.month=1;
 		this.year=1;
 	}
-	public Date(int day, int month, int year) {
+	public Date(int day, int month, int year) throws DateException {
+		if((day>0)&&(day<32)) {
+			this.day=day;
+		}
+		else {
+			throw new DateException("Error en el dia introducido.");
+		}
 		this.day=day;
 		this.month= month;
 		this.year= year;
