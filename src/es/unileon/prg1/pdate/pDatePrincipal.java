@@ -1,7 +1,7 @@
 package es.unileon.prg1.pdate;
 
 public class pDatePrincipal {
-	public static void main(String[] args ) {
+	public static void main(String[] args ) throws DateException {
 		Date myFecha= new Date();
 		Date myFecha2= new Date(30,10,2019);
 		
@@ -22,6 +22,10 @@ public class pDatePrincipal {
 		}
 
 	}
+
+	
+	
+	
 		
 
 }
