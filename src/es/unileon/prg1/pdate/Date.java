@@ -9,9 +9,9 @@ public class Date {
 	//Constructor de la clase Date
 	
 	public Date() {
-		this.day=1;
-		this.month=1;
-		this.year=1;
+		this.day=23;
+		this.month=5;
+		this.year=2016;
 	}
 	public Date(int day, int month, int year) throws DateException {
 		if((day>0)&&(day<32)) {
@@ -57,25 +57,17 @@ public class Date {
 		this.year = year;
 	}
 	//Metodos isSameYear, isSameMonth, isSameDay
-	public boolean isSameYear(int year) {
-		if(this.year==year) {
-			return true;
-			
-		}
-		else {
-			return false;
-		}
-	}
-	public boolean isSameMonth(int month) {
-		if(this.month==month) {
+	
+	public boolean isSameMonth(Date miFecha) {
+		if(this.month==miFecha.month) {
 			return true;
 		}
 		else {
 			return false;
 		}
 	}
-	public boolean isSameDay(int day) {
-		if(this.day==day) {
+	public boolean isSameDay(Date miFecha) {
+		if(this.day==miFecha.day) {
 			return true;
 		}
 		else {
@@ -84,8 +76,8 @@ public class Date {
 	}
 	//Metodo isSame
 	
-	public boolean isSame(int day, int month, int year) {
-		if(this.day==day && this.month==month && this.year==year) {
+	public boolean isSame(Date miFecha) {
+		if(this.day==miFecha.day && this.month==miFecha.month && this.year==miFecha.year) {
 			return true;
 		}
 		else {
@@ -146,8 +138,8 @@ public class Date {
 	//Metodo para imprimir el mes
 	
 	public void printMonth() {
-		String month1= getMonthName();
-		System.out.println("El mes introducido es: "+month1+".\n");
+		String month= getMonthName();
+		System.out.println("Mes actual: "+month+" .\n");
 	}
 	
 	//Metodo que comprueba si el dia en ese mes es correcto.
@@ -184,7 +176,31 @@ public class Date {
 			return false;
 		}
 	}
-	
+	//Metodo para imprimir la estacion del año del mes.
+	public String getSeason() {
+		String nameSeason=null;
+		switch(month) {
+		case 1:
+		case 2:
+		case 3: nameSeason="Invierno";
+		break;
+		case 4:
+		case 5:
+		case 6: nameSeason="Primavera";
+		break;
+		case 7:
+		case 8:
+		case 9: nameSeason="Verano";
+		break;
+		case 10:
+		case 11:
+		case 12: nameSeason="Otonio";
+		break;
+		default: nameSeason="Numero del mes no valido.";
+		}
+		return nameSeason;
+	}
+	//Metodo que imprime los meses que faltan de año.
 	public String monthsLeft(int month) {
 		StringBuffer cadena= new StringBuffer();
 		for(int i=month+1; i<=12; i++) {
@@ -192,6 +208,7 @@ public class Date {
 		}
 		return cadena.toString();
 	}
+	//Metodo que imprime una fecha.
 	public String printDate(int day, int month, int year) {
 		String printDate=("Fecha: "+day+"/"+month+"/"+year);
 		return printDate;
@@ -224,13 +241,13 @@ public class Date {
 	}
 	//Contar el numero de dias desde el primer dia del año
 	
-	public int daysSinceFirstOfYear() {
+	public int daysSinceFirstOfYear() throws DateException {
 		int daysSinceFirstOfYear=0;
 		
-		Date fecha3 = new Date(1,1, year);
-		for(int i=1; i<this.month; i++) {
+		Date miFecha3 =new Date(1,1, year);
+		for(int i=1; i<month; i++) {
 			daysSinceFirstOfYear += getDaysOfTheMonth(i);
-			fecha3.setMonth(i+ 1);
+			miFecha3.setMonth(i+ 1);
 		}
 		daysSinceFirstOfYear= daysSinceFirstOfYear + this.day -1;
 		return daysSinceFirstOfYear;
@@ -290,9 +307,9 @@ public class Date {
 	return semana;
 	}
 	
-	public String dayOfWeek(int day) {
+	public String dayOfWeek(int day) throws DateException {
 		int name;
-		name= (daysSinceFirstOfYear()%7 + day)%7;
+		name= (daysSinceFirstOfYear() %7 + day)%7;
 		return nameOftheDay(name);
 	}
 	
